@@ -34,6 +34,54 @@ interface Post {
   voice_url: string | null;
 }
 
+/**
+ * Convert basic markdown syntax to HTML.
+ * Handles headings (#), bold (**), italic (*), and line breaks.
+ */
+function renderMarkdown(text: string): string {
+  // If content already looks like HTML (has tags), return as-is
+  if (/<[a-z][\s\S]*>/i.test(text) && !text.startsWith('#') && !text.includes('**')) {
+    return text;
+  }
+
+  let html = text
+    // Escape HTML entities (but preserve existing HTML tags if mixed)
+    // Split into lines for heading processing
+    .split('\n')
+    .map((line) => {
+      // Headings: # to ######
+      const headingMatch = line.match(/^(#{1,6})\s+(.+)$/);
+      if (headingMatch) {
+        const level = headingMatch[1].length;
+        const content = headingMatch[2];
+        return `<h${level}>${content}</h${level}>`;
+      }
+      return line;
+    })
+    .join('\n');
+
+  // Bold: **text**
+  html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+
+  // Italic: *text* (but not inside ** pairs)
+  html = html.replace(/(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)/g, '<em>$1</em>');
+
+  // Line breaks: double newline = paragraph, single = <br>
+  html = html
+    .split(/\n\n+/)
+    .map((block) => {
+      const trimmed = block.trim();
+      if (!trimmed) return '';
+      // Don't wrap headings in <p>
+      if (/^<h[1-6]>/.test(trimmed)) return trimmed;
+      return `<p>${trimmed.replace(/\n/g, '<br>')}</p>`;
+    })
+    .filter(Boolean)
+    .join('\n');
+
+  return html;
+}
+
 export default function BlogPostPage() {
   const params = useParams();
   const router = useRouter();
@@ -345,6 +393,21 @@ export default function BlogPostPage() {
               </div>
             </div>
 
+            {/* Cover Image */}
+            {post.cover_image && (
+              <div className="relative w-full aspect-video rounded-2xl overflow-hidden mb-8">
+                <img
+                  src={post.cover_image}
+                  alt={post.title}
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.currentTarget.style.display = "none";
+                  }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/40 via-transparent to-transparent" />
+              </div>
+            )}
+
             {/* Social Share */}
             <div className="flex items-center gap-3">
               <span className="text-gray-400 font-medium">שתף:</span>
@@ -382,7 +445,7 @@ export default function BlogPostPage() {
           <div
             ref={contentRef}
             className="prose prose-invert max-w-none mb-16"
-            dangerouslySetInnerHTML={{ __html: post.content }}
+            dangerouslySetInnerHTML={{ __html: renderMarkdown(post.content) }}
           />
 
           {/* Back to Blog Button */}
