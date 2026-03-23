@@ -82,8 +82,35 @@ export default function AdminDashboardPage() {
         return;
       }
 
-      const data = await response.json();
-      setStats(data);
+      const result = await response.json();
+      if (!result.success || !result.data) {
+        setError("שגיאה בטעינת נתונים");
+        return;
+      }
+      const d = result.data;
+      setStats({
+        totalPosts: d.totalPosts,
+        publishedPosts: d.publishedPosts,
+        totalViews: d.totalViews,
+        analyticsEvents: d.totalAnalyticsEvents,
+        viewsByDay: d.viewsByDay || [],
+        categoryDistribution: d.categoryDistribution || [],
+        topPosts: (d.topPosts || []).map((p: any) => ({
+          id: p.id,
+          title: p.title,
+          views: p.views,
+          category: p.category,
+          createdAt: p.created_at,
+        })),
+        recentPosts: (d.recentPosts || []).map((p: any) => ({
+          id: p.id,
+          title: p.title,
+          published: p.is_published,
+          createdAt: p.created_at,
+        })),
+        avgScrollDepth: d.avgScrollDepth || 0,
+        avgTimeSpent: d.avgTimeSpent || 0,
+      });
     } catch (err) {
       setError("שגיאה בטעינת נתונים");
     } finally {
