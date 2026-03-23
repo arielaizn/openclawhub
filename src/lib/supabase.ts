@@ -54,6 +54,9 @@ export interface Post {
   views: number;
   created_at: string;
   updated_at: string;
+  title_en: string | null;
+  content_en: string | null;
+  excerpt_en: string | null;
 }
 
 export interface Analytics {

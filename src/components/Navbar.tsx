@@ -2,11 +2,12 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [language, setLanguage] = useState<"he" | "en">("he");
+  const { language, toggleLanguage } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,13 +17,6 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const toggleLanguage = () => {
-    const newLang = language === "he" ? "en" : "he";
-    setLanguage(newLang);
-    document.documentElement.lang = newLang;
-    document.documentElement.dir = newLang === "he" ? "rtl" : "ltr";
-  };
 
   const navLinks = {
     he: [

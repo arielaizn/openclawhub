@@ -70,6 +70,9 @@ export async function POST(request: NextRequest) {
       reading_time = Math.ceil(content.split(/\s+/).length / 200), // ~200 words per minute
       voice_url = null,
       is_published = 1, // Webhook posts are published by default
+      title_en = null,
+      content_en = null,
+      excerpt_en = null,
     } = body;
 
     // Generate slug from title
@@ -87,6 +90,9 @@ export async function POST(request: NextRequest) {
       p_reading_time: reading_time,
       p_voice_url: voice_url,
       p_is_published: is_published,
+      p_title_en: title_en,
+      p_content_en: content_en,
+      p_excerpt_en: excerpt_en,
     });
 
     if (error) {

@@ -100,7 +100,7 @@ export async function PUT(
     }
 
     // Build update object with allowed fields
-    const allowedFields = ['title', 'content', 'excerpt', 'cover_image', 'category', 'tags', 'reading_time', 'voice_url', 'is_published'];
+    const allowedFields = ['title', 'content', 'excerpt', 'cover_image', 'category', 'tags', 'reading_time', 'voice_url', 'is_published', 'title_en', 'content_en', 'excerpt_en'];
     const updates: Record<string, any> = {};
 
     for (const field of allowedFields) {

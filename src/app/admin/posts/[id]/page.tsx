@@ -27,6 +27,9 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
   const [tags, setTags] = useState("");
   const [coverImage, setCoverImage] = useState("");
   const [voiceUrl, setVoiceUrl] = useState("");
+  const [titleEn, setTitleEn] = useState("");
+  const [contentEn, setContentEn] = useState("");
+  const [excerptEn, setExcerptEn] = useState("");
   const [published, setPublished] = useState(false);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -67,6 +70,9 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
       setTags(data.tags || "");
       setCoverImage(data.cover_image || "");
       setVoiceUrl(data.voice_url || "");
+      setTitleEn(data.title_en || "");
+      setContentEn(data.content_en || "");
+      setExcerptEn(data.excerpt_en || "");
       setPublished(data.is_published === 1);
     } catch (err) {
       alert("שגיאה בטעינת הפוסט");
@@ -100,6 +106,9 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
           tags,
           cover_image: coverImage || '/default-cover.jpg',
           voice_url: voiceUrl || null,
+          title_en: titleEn || null,
+          content_en: contentEn || null,
+          excerpt_en: excerptEn || null,
           is_published: published ? 1 : 0,
         }),
       });
@@ -291,6 +300,61 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
                   transition-all resize-none"
                 placeholder="תקציר קצר של הפוסט (1-2 משפטים)"
               />
+            </div>
+
+            {/* English Translation Section */}
+            <div className="glass-card p-6 border border-blue-400/20">
+              <h3 className="text-lg font-bold text-white mb-4">
+                English Translation
+                <span className="text-gray-500 text-sm font-normal mr-2">(תרגום לאנגלית)</span>
+              </h3>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                    Title (EN)
+                  </label>
+                  <input
+                    type="text"
+                    value={titleEn}
+                    onChange={(e) => setTitleEn(e.target.value)}
+                    className="w-full px-4 py-3 bg-slate-800 border border-cyan-400/20 rounded-lg
+                      text-white placeholder-gray-500
+                      focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20
+                      transition-all"
+                    placeholder="English title..."
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                    Content (EN)
+                  </label>
+                  <textarea
+                    value={contentEn}
+                    onChange={(e) => setContentEn(e.target.value)}
+                    rows={10}
+                    className="w-full px-4 py-3 bg-slate-800 border border-cyan-400/20 rounded-lg
+                      text-white placeholder-gray-500 font-mono text-sm
+                      focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20
+                      transition-all resize-none"
+                    placeholder="English content..."
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                    Excerpt (EN)
+                  </label>
+                  <textarea
+                    value={excerptEn}
+                    onChange={(e) => setExcerptEn(e.target.value)}
+                    rows={3}
+                    className="w-full px-4 py-3 bg-slate-800 border border-cyan-400/20 rounded-lg
+                      text-white placeholder-gray-500
+                      focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20
+                      transition-all resize-none"
+                    placeholder="Short English excerpt..."
+                  />
+                </div>
+              </div>
             </div>
 
             {/* Category and Tags */}

@@ -3,6 +3,7 @@ import { Heebo, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 
 const heebo = Heebo({
   subsets: ["hebrew", "latin"],
@@ -45,17 +46,19 @@ export default function RootLayout({
   return (
     <html lang="he" dir="rtl" className={`${heebo.variable} ${spaceGrotesk.variable}`}>
       <body className="antialiased min-h-screen flex flex-col">
-        {/* Ambient floating orbs */}
-        <div className="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden="true">
-          <div className="ambient-orb ambient-orb-1" />
-          <div className="ambient-orb ambient-orb-2" />
-          <div className="ambient-orb ambient-orb-3" />
-        </div>
-        <Navbar />
-        <main className="flex-grow relative z-10">
-          {children}
-        </main>
-        <Footer />
+        <LanguageProvider>
+          {/* Ambient floating orbs */}
+          <div className="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden="true">
+            <div className="ambient-orb ambient-orb-1" />
+            <div className="ambient-orb ambient-orb-2" />
+            <div className="ambient-orb ambient-orb-3" />
+          </div>
+          <Navbar />
+          <main className="flex-grow relative z-10">
+            {children}
+          </main>
+          <Footer />
+        </LanguageProvider>
       </body>
     </html>
   );

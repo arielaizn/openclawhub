@@ -17,6 +17,7 @@ import {
   Loader2,
 } from "lucide-react";
 import BlogCard from "@/components/BlogCard";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface Post {
   id: number;
@@ -32,6 +33,9 @@ interface Post {
   views: number;
   cover_image: string;
   voice_url: string | null;
+  title_en: string | null;
+  content_en: string | null;
+  excerpt_en: string | null;
 }
 
 /**
@@ -146,6 +150,7 @@ export default function BlogPostPage() {
   const params = useParams();
   const router = useRouter();
   const slug = params.slug as string;
+  const { language } = useLanguage();
 
   const [post, setPost] = useState<Post | null>(null);
   const [relatedPosts, setRelatedPosts] = useState<Post[]>([]);
@@ -330,6 +335,11 @@ export default function BlogPostPage() {
     return null;
   }
 
+  // Pick language-appropriate fields (fall back to Hebrew if no translation)
+  const isEn = language === "en";
+  const displayTitle = isEn && post.title_en ? post.title_en : post.title;
+  const displayContent = isEn && post.content_en ? post.content_en : post.content;
+
   return (
     <div className="min-h-screen">
       {/* Reading Progress Bar */}
@@ -359,7 +369,7 @@ export default function BlogPostPage() {
                 בלוג
               </Link>
               <span>/</span>
-              <span className="text-white">{post.title}</span>
+              <span className="text-white">{displayTitle}</span>
             </div>
           </nav>
 
@@ -374,7 +384,7 @@ export default function BlogPostPage() {
 
             {/* Title */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-tight">
-              {post.title}
+              {displayTitle}
             </h1>
 
             {/* Meta Information */}
@@ -402,7 +412,7 @@ export default function BlogPostPage() {
               <div className="relative w-full aspect-video rounded-2xl overflow-hidden mb-8">
                 <img
                   src={post.cover_image}
-                  alt={post.title}
+                  alt={displayTitle}
                   className="w-full h-full object-cover"
                   onError={(e) => {
                     e.currentTarget.style.display = "none";
@@ -505,7 +515,7 @@ export default function BlogPostPage() {
           <div
             ref={contentRef}
             className="prose prose-invert max-w-none mb-16"
-            dangerouslySetInnerHTML={{ __html: renderMarkdown(post.content) }}
+            dangerouslySetInnerHTML={{ __html: renderMarkdown(displayContent) }}
           />
 
           {/* Back to Blog Button */}
