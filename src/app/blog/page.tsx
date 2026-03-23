@@ -29,12 +29,12 @@ interface PostsResponse {
 }
 
 const categories = [
-  { value: "", label: "הכל", color: "from-cyan-400 to-purple-500" },
-  { value: "מדריכים", label: "מדריכים", color: "from-cyan-400 to-cyan-500" },
-  { value: "חדשות", label: "חדשות", color: "from-purple-400 to-purple-500" },
+  { value: "", label: "הכל", color: "from-red-600 to-red-500" },
+  { value: "מדריכים", label: "מדריכים", color: "from-red-500 to-red-400" },
+  { value: "חדשות", label: "חדשות", color: "from-red-400 to-red-500" },
   { value: "טיפים", label: "טיפים", color: "from-orange-400 to-orange-500" },
-  { value: "עדכונים", label: "עדכונים", color: "from-pink-400 to-pink-500" },
-  { value: "טכני", label: "טכני", color: "from-blue-400 to-blue-500" },
+  { value: "עדכונים", label: "עדכונים", color: "from-red-600 to-red-700" },
+  { value: "טכני", label: "טכני", color: "from-red-500 to-red-600" },
 ];
 
 export default function BlogPage() {
@@ -110,14 +110,14 @@ export default function BlogPage() {
           {/* Search Bar */}
           <div className="relative max-w-2xl mx-auto group">
             <div className="absolute inset-y-0 right-0 flex items-center pr-5 pointer-events-none">
-              <Search className="w-5 h-5 text-gray-500 group-focus-within:text-cyan-400 transition-colors" />
+              <Search className="w-5 h-5 text-gray-500 group-focus-within:text-red-500 transition-colors" />
             </div>
             <input
               type="text"
               placeholder="חיפוש במאמרים..."
               value={searchQuery}
               onChange={handleSearch}
-              className="w-full px-6 py-4 pr-14 bg-[rgba(12,20,40,0.6)] border border-cyan-400/10 rounded-2xl text-white placeholder-gray-600 focus:outline-none focus:border-cyan-400/40 focus:shadow-[0_0_30px_rgba(45,212,191,0.1)] transition-all duration-300 font-light"
+              className="w-full px-6 py-4 pr-14 bg-[rgba(17,17,17,0.6)] border border-red-500/10 rounded-2xl text-white placeholder-gray-600 focus:outline-none focus:border-red-500/40 focus:shadow-[0_0_30px_rgba(220,38,38,0.1)] transition-all duration-300 font-light"
             />
           </div>
 
@@ -129,8 +129,8 @@ export default function BlogPage() {
                 onClick={() => handleCategoryChange(category.value)}
                 className={`px-5 py-2.5 rounded-full font-medium transition-all duration-300 text-sm ${
                   selectedCategory === category.value
-                    ? `bg-gradient-to-r ${category.color} text-white shadow-lg shadow-cyan-400/20`
-                    : "bg-[rgba(12,20,40,0.5)] text-gray-500 border border-white/5 hover:border-cyan-400/20 hover:text-gray-300"
+                    ? `bg-gradient-to-r ${category.color} text-white shadow-lg shadow-red-500/20`
+                    : "bg-[rgba(17,17,17,0.5)] text-gray-500 border border-white/5 hover:border-red-500/20 hover:text-gray-300"
                 }`}
               >
                 {category.label}
@@ -150,8 +150,8 @@ export default function BlogPage() {
         {loading && (
           <div className="flex flex-col items-center justify-center py-24">
             <div className="relative">
-              <Loader2 className="w-12 h-12 text-cyan-400 animate-spin" />
-              <div className="absolute inset-0 rounded-full bg-cyan-400/20 blur-xl" />
+              <Loader2 className="w-12 h-12 text-red-500 animate-spin" />
+              <div className="absolute inset-0 rounded-full bg-red-500/20 blur-xl" />
             </div>
             <p className="text-gray-500 mt-6 font-light">טוען מאמרים...</p>
           </div>
@@ -169,8 +169,8 @@ export default function BlogPage() {
         {/* Empty State */}
         {!loading && posts.length === 0 && (
           <div className="glass-card p-16 text-center">
-            <div className="w-28 h-28 mx-auto mb-8 rounded-full bg-gradient-to-br from-cyan-400/10 to-purple-400/10 flex items-center justify-center">
-              <Sparkles className="w-12 h-12 text-cyan-400/40" />
+            <div className="w-28 h-28 mx-auto mb-8 rounded-full bg-gradient-to-br from-red-500/10 to-red-400/10 flex items-center justify-center">
+              <Sparkles className="w-12 h-12 text-red-500/40" />
             </div>
             <h3 className="text-2xl font-bold text-white mb-3">אין פוסטים עדיין</h3>
             <p className="text-gray-500 font-light">נסה לשנות את קריטריוני החיפוש או הקטגוריה</p>
@@ -183,7 +183,7 @@ export default function BlogPage() {
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
-              className="px-5 py-2.5 rounded-xl bg-[rgba(12,20,40,0.5)] border border-white/5 text-white disabled:opacity-30 disabled:cursor-not-allowed hover:border-cyan-400/20 transition-all duration-300 text-sm"
+              className="px-5 py-2.5 rounded-xl bg-[rgba(17,17,17,0.5)] border border-white/5 text-white disabled:opacity-30 disabled:cursor-not-allowed hover:border-red-500/20 transition-all duration-300 text-sm"
             >
               הקודם
             </button>
@@ -197,8 +197,8 @@ export default function BlogPage() {
                       onClick={() => handlePageChange(page)}
                       className={`w-10 h-10 rounded-xl font-medium transition-all duration-300 text-sm ${
                         currentPage === page
-                          ? "bg-gradient-to-r from-cyan-400 to-purple-500 text-white shadow-lg shadow-cyan-400/20"
-                          : "bg-[rgba(12,20,40,0.5)] border border-white/5 text-gray-500 hover:border-cyan-400/20 hover:text-cyan-400"
+                          ? "bg-gradient-to-r from-red-600 to-red-500 text-white shadow-lg shadow-red-500/20"
+                          : "bg-[rgba(17,17,17,0.5)] border border-white/5 text-gray-500 hover:border-red-500/20 hover:text-red-500"
                       }`}
                     >
                       {page}
@@ -216,7 +216,7 @@ export default function BlogPage() {
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className="px-5 py-2.5 rounded-xl bg-[rgba(12,20,40,0.5)] border border-white/5 text-white disabled:opacity-30 disabled:cursor-not-allowed hover:border-cyan-400/20 transition-all duration-300 text-sm"
+              className="px-5 py-2.5 rounded-xl bg-[rgba(17,17,17,0.5)] border border-white/5 text-white disabled:opacity-30 disabled:cursor-not-allowed hover:border-red-500/20 transition-all duration-300 text-sm"
             >
               הבא
             </button>

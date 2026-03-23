@@ -54,7 +54,7 @@ export default function Navbar() {
     <nav
       className={`sticky top-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? "bg-[rgba(6,10,20,0.85)] backdrop-blur-2xl shadow-[0_4px_30px_rgba(0,0,0,0.4)] border-b border-cyan-400/10"
+          ? "bg-[rgba(10,10,10,0.85)] backdrop-blur-2xl shadow-[0_4px_30px_rgba(0,0,0,0.4)] border-b border-red-500/10"
           : "bg-transparent"
       }`}
     >
@@ -64,7 +64,7 @@ export default function Navbar() {
           isScrolled ? "opacity-100" : "opacity-0"
         }`}
         style={{
-          background: "linear-gradient(90deg, transparent, #2dd4bf, #8b5cf6, #f59e0b, transparent)",
+          background: "linear-gradient(90deg, transparent, #dc2626, #ef4444, #f97316, transparent)",
         }}
       />
 
@@ -81,12 +81,12 @@ export default function Navbar() {
               viewBox="0 0 100 100"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className="transition-all duration-500 group-hover:rotate-12 group-hover:drop-shadow-[0_0_12px_rgba(45,212,191,0.5)]"
+              className="transition-all duration-500 group-hover:rotate-12 group-hover:drop-shadow-[0_0_12px_rgba(220,38,38,0.5)]"
             >
               <defs>
                 <linearGradient id="clawGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#2dd4bf" />
-                  <stop offset="100%" stopColor="#8b5cf6" />
+                  <stop offset="0%" stopColor="#dc2626" />
+                  <stop offset="100%" stopColor="#ef4444" />
                 </linearGradient>
               </defs>
               <path
@@ -103,7 +103,7 @@ export default function Navbar() {
                 d="M50 30 C45 35, 40 45, 40 55 L35 75 C40 80, 45 85, 50 90 C55 85, 60 80, 65 75 L60 55 C60 45, 55 35, 50 30 Z"
                 fill="url(#clawGradient)"
               />
-              <circle cx="50" cy="85" r="5" fill="#f59e0b" opacity="0.8" />
+              <circle cx="50" cy="85" r="5" fill="#f97316" opacity="0.8" />
             </svg>
 
             <span className="text-2xl font-extrabold text-gradient-static">
@@ -121,15 +121,15 @@ export default function Navbar() {
                 className="text-gray-400 hover:text-white transition-all duration-300 font-medium relative group py-1"
               >
                 {link.label}
-                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-cyan-400 to-purple-500 transition-all duration-400 group-hover:w-full rounded-full" />
-                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-cyan-400 blur-sm transition-all duration-400 group-hover:w-full" />
+                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-red-600 to-red-500 transition-all duration-400 group-hover:w-full rounded-full" />
+                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-red-500 blur-sm transition-all duration-400 group-hover:w-full" />
               </Link>
             ))}
 
             {/* Language Toggle */}
             <button
               onClick={toggleLanguage}
-              className="px-4 py-2 rounded-lg bg-gradient-to-r from-cyan-500/20 to-purple-600/20 text-cyan-300 font-bold border border-cyan-400/30 hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(45,212,191,0.2)] hover:scale-105 transition-all duration-300"
+              className="px-4 py-2 rounded-lg bg-gradient-to-r from-red-600/20 to-red-500/20 text-red-400 font-bold border border-red-500/30 hover:border-red-500 hover:shadow-[0_0_20px_rgba(220,38,38,0.2)] hover:scale-105 transition-all duration-300"
               aria-label="Toggle language"
             >
               {language === "he" ? "EN" : "HE"}
@@ -140,7 +140,7 @@ export default function Navbar() {
           <div className="md:hidden flex items-center gap-4">
             <button
               onClick={toggleLanguage}
-              className="px-3 py-1.5 rounded-lg bg-gradient-to-r from-cyan-500/20 to-purple-600/20 text-cyan-300 text-sm font-bold border border-cyan-400/30"
+              className="px-3 py-1.5 rounded-lg bg-gradient-to-r from-red-600/20 to-red-500/20 text-red-400 text-sm font-bold border border-red-500/30"
               aria-label="Toggle language"
             >
               {language === "he" ? "EN" : "HE"}
@@ -148,7 +148,7 @@ export default function Navbar() {
 
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-300 hover:text-cyan-400 transition-colors p-1"
+              className="text-gray-300 hover:text-red-500 transition-colors p-1"
               aria-label="Toggle menu"
             >
               <svg
@@ -176,7 +176,7 @@ export default function Navbar() {
             isMenuOpen ? "max-h-60 opacity-100 pb-4" : "max-h-0 opacity-0"
           }`}
         >
-          <div className="flex flex-col gap-1 pt-4 border-t border-cyan-400/10">
+          <div className="flex flex-col gap-1 pt-4 border-t border-red-500/10">
             {navLinks[language].map((link, index) => (
               <Link
                 key={link.href}
@@ -185,7 +185,7 @@ export default function Navbar() {
                   handleSmoothScroll(e, link.href);
                   setIsMenuOpen(false);
                 }}
-                className="text-gray-400 hover:text-cyan-400 transition-all duration-300 font-medium px-3 py-2.5 rounded-lg hover:bg-cyan-400/5"
+                className="text-gray-400 hover:text-red-500 transition-all duration-300 font-medium px-3 py-2.5 rounded-lg hover:bg-red-500/5"
                 style={{ animationDelay: `${index * 50}ms` }}
               >
                 {link.label}

@@ -211,7 +211,7 @@ export default function BlogPostPage() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <Loader2 className="w-12 h-12 text-cyan-400 animate-spin mx-auto mb-4" />
+          <Loader2 className="w-12 h-12 text-red-500 animate-spin mx-auto mb-4" />
           <p className="text-gray-400">טוען מאמר...</p>
         </div>
       </div>
@@ -227,7 +227,7 @@ export default function BlogPostPage() {
       {/* Reading Progress Bar */}
       <div className="fixed top-0 left-0 right-0 h-1 bg-slate-900/50 z-50">
         <div
-          className="h-full bg-gradient-to-r from-cyan-400 to-purple-500 transition-all duration-150"
+          className="h-full bg-gradient-to-r from-red-600 to-red-500 transition-all duration-150"
           style={{ width: `${readingProgress}%` }}
         />
       </div>
@@ -239,14 +239,14 @@ export default function BlogPostPage() {
             <div className="flex items-center gap-2 text-sm text-gray-400">
               <Link
                 href="/"
-                className="hover:text-cyan-400 transition-colors"
+                className="hover:text-red-500 transition-colors"
               >
                 בית
               </Link>
               <span>/</span>
               <Link
                 href="/blog"
-                className="hover:text-cyan-400 transition-colors"
+                className="hover:text-red-500 transition-colors"
               >
                 בלוג
               </Link>
@@ -259,7 +259,7 @@ export default function BlogPostPage() {
           <header className="mb-12">
             {/* Category Badge */}
             <div className="mb-4">
-              <span className="inline-block px-4 py-2 rounded-full text-sm font-medium bg-cyan-400/20 text-cyan-300 border border-cyan-400/30">
+              <span className="inline-block px-4 py-2 rounded-full text-sm font-medium bg-red-500/20 text-red-400 border border-red-500/30">
                 {post.category}
               </span>
             </div>
@@ -272,11 +272,11 @@ export default function BlogPostPage() {
             {/* Meta Information */}
             <div className="flex flex-wrap items-center gap-4 text-gray-400 mb-8">
               <div className="flex items-center gap-2">
-                <User className="w-5 h-5 text-cyan-400" />
+                <User className="w-5 h-5 text-red-500" />
                 <span>{post.author}</span>
               </div>
               <div className="flex items-center gap-2">
-                <Calendar className="w-5 h-5 text-purple-400" />
+                <Calendar className="w-5 h-5 text-red-400" />
                 <span>{formatDate(post.created_at)}</span>
               </div>
               <div className="flex items-center gap-2">
@@ -284,14 +284,14 @@ export default function BlogPostPage() {
                 <span>{post.reading_time} דקות קריאה</span>
               </div>
               <div className="flex items-center gap-2">
-                <Eye className="w-5 h-5 text-cyan-400" />
+                <Eye className="w-5 h-5 text-red-500" />
                 <span>{post.views.toLocaleString()} צפיות</span>
               </div>
             </div>
 
             {/* Author Card */}
             <div className="glass-card p-6 flex items-start gap-4 mb-8">
-              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-cyan-400 to-purple-500 flex items-center justify-center flex-shrink-0">
+              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-red-600 to-red-500 flex items-center justify-center flex-shrink-0">
                 <User className="w-8 h-8 text-white" />
               </div>
               <div>
@@ -305,8 +305,8 @@ export default function BlogPostPage() {
             {/* Voice Section */}
             <div className="glass-card p-6 mb-8">
               <div className="flex items-center gap-4">
-                <div className="p-3 bg-purple-400/10 rounded-xl">
-                  <Volume2 className="w-6 h-6 text-purple-400" />
+                <div className="p-3 bg-red-500/10 rounded-xl">
+                  <Volume2 className="w-6 h-6 text-red-500" />
                 </div>
                 <div className="flex-grow">
                   <h3 className="text-lg font-bold text-white mb-1">
@@ -316,7 +316,7 @@ export default function BlogPostPage() {
                     <div className="flex items-center gap-4">
                       <button
                         onClick={handleAudioToggle}
-                        className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-cyan-400 text-white font-medium hover:shadow-lg transition-all"
+                        className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-red-600 to-red-500 text-white font-medium hover:shadow-lg transition-all"
                       >
                         {isPlaying ? (
                           <>
@@ -350,21 +350,21 @@ export default function BlogPostPage() {
               <span className="text-gray-400 font-medium">שתף:</span>
               <button
                 onClick={() => handleShare("copy")}
-                className="p-2 rounded-lg bg-slate-900/50 border border-cyan-400/20 text-cyan-400 hover:border-cyan-400 transition-colors"
+                className="p-2 rounded-lg bg-slate-900/50 border border-red-500/20 text-red-500 hover:border-red-500 transition-colors"
                 title="העתק קישור"
               >
                 <Link2 className="w-5 h-5" />
               </button>
               <button
                 onClick={() => handleShare("twitter")}
-                className="p-2 rounded-lg bg-slate-900/50 border border-cyan-400/20 text-cyan-400 hover:border-cyan-400 transition-colors"
+                className="p-2 rounded-lg bg-slate-900/50 border border-red-500/20 text-red-500 hover:border-red-500 transition-colors"
                 title="שתף בטוויטר"
               >
                 <Share2 className="w-5 h-5" />
               </button>
               <button
                 onClick={() => handleShare("whatsapp")}
-                className="p-2 rounded-lg bg-slate-900/50 border border-cyan-400/20 text-cyan-400 hover:border-cyan-400 transition-colors"
+                className="p-2 rounded-lg bg-slate-900/50 border border-red-500/20 text-red-500 hover:border-red-500 transition-colors"
                 title="שתף בווצאפ"
               >
                 <svg
@@ -389,7 +389,7 @@ export default function BlogPostPage() {
           <div className="mb-16">
             <Link
               href="/blog"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-cyan-400 to-purple-500 text-white font-medium hover:shadow-lg transition-all"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-red-600 to-red-500 text-white font-medium hover:shadow-lg transition-all"
             >
               <ArrowRight className="w-5 h-5" />
               חזרה לבלוג
@@ -400,7 +400,7 @@ export default function BlogPostPage() {
           {relatedPosts.length > 0 && (
             <section>
               <h2 className="text-3xl font-bold text-white mb-8">
-                <span className="text-cyan-400">מאמרים</span> קשורים
+                <span className="text-red-500">מאמרים</span> קשורים
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {relatedPosts.map((relatedPost) => (

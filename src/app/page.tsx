@@ -56,7 +56,7 @@ export default function HomePage() {
       titleEn: "Communication Channels",
       description:
         "WhatsApp, Telegram, Discord, Slack, Gmail - כל הערוצים במקום אחד",
-      color: "cyan",
+      color: "red",
       number: "01",
     },
     {
@@ -64,7 +64,7 @@ export default function HomePage() {
       titleHe: "בידוד קונטיינרים",
       titleEn: "Container Isolation",
       description: "כל סוכן רץ בקונטיינר Linux מבודד עם אבטחה מקסימלית",
-      color: "purple",
+      color: "redBright",
       number: "02",
     },
     {
@@ -80,7 +80,7 @@ export default function HomePage() {
       titleHe: "מערכת סקילס",
       titleEn: "Skills System",
       description: "הרחב את היכולות עם סקילים מותאמים אישית לכל צורך",
-      color: "cyan",
+      color: "red",
       number: "04",
     },
     {
@@ -88,7 +88,7 @@ export default function HomePage() {
       titleHe: "אינטגרציות MCP",
       titleEn: "MCP Integration",
       description: "התחבר לשירותים חיצוניים בקלות עם Model Context Protocol",
-      color: "purple",
+      color: "redBright",
       number: "05",
     },
     {
@@ -120,17 +120,17 @@ export default function HomePage() {
   ];
 
   const colorClasses: Record<string, { icon: string; bg: string; border: string; glow: string }> = {
-    cyan: {
-      icon: "text-cyan-400",
-      bg: "bg-gradient-to-br from-cyan-400/15 to-cyan-400/5",
-      border: "card-accent-cyan",
-      glow: "group-hover:shadow-[0_0_30px_rgba(45,212,191,0.15)]",
+    red: {
+      icon: "text-red-500",
+      bg: "bg-gradient-to-br from-red-500/15 to-red-500/5",
+      border: "card-accent-red",
+      glow: "group-hover:shadow-[0_0_30px_rgba(220,38,38,0.15)]",
     },
-    purple: {
-      icon: "text-purple-400",
-      bg: "bg-gradient-to-br from-purple-400/15 to-purple-400/5",
-      border: "card-accent-purple",
-      glow: "group-hover:shadow-[0_0_30px_rgba(139,92,246,0.15)]",
+    redBright: {
+      icon: "text-red-400",
+      bg: "bg-gradient-to-br from-red-400/15 to-red-400/5",
+      border: "card-accent-red-bright",
+      glow: "group-hover:shadow-[0_0_30px_rgba(239,68,68,0.15)]",
     },
     orange: {
       icon: "text-orange-400",
@@ -161,7 +161,7 @@ export default function HomePage() {
         <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
-            backgroundImage: `linear-gradient(rgba(45,212,191,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(45,212,191,0.3) 1px, transparent 1px)`,
+            backgroundImage: `linear-gradient(rgba(220,38,38,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(220,38,38,0.3) 1px, transparent 1px)`,
             backgroundSize: "60px 60px",
           }}
         />
@@ -170,23 +170,23 @@ export default function HomePage() {
           <div className="text-center max-w-5xl mx-auto">
             {/* Floating badge */}
             <div className="mb-8 animate-slideDown">
-              <span className="floating-badge inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold text-cyan-300">
+              <span className="floating-badge inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold text-red-400">
                 <Zap className="w-4 h-4" />
                 <span>The #1 AI Assistant Platform</span>
-                <span className="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-pulse" />
+                <span className="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse" />
               </span>
             </div>
 
             {/* Logo */}
             <div className="mb-10 flex justify-center animate-slideDown">
               <div className="relative w-36 h-36 sm:w-44 sm:h-44 lg:w-52 lg:h-52">
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-400/20 via-purple-500/20 to-orange-500/20 blur-xl animate-pulse-slow" />
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-red-600/20 via-red-500/20 to-orange-500/20 blur-xl animate-pulse-slow" />
                 <svg viewBox="0 0 200 200" className="w-full h-full drop-shadow-2xl relative z-10">
                   <defs>
                     <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#2dd4bf" />
-                      <stop offset="50%" stopColor="#8b5cf6" />
-                      <stop offset="100%" stopColor="#f59e0b" />
+                      <stop offset="0%" stopColor="#dc2626" />
+                      <stop offset="50%" stopColor="#ef4444" />
+                      <stop offset="100%" stopColor="#f97316" />
                     </linearGradient>
                     <filter id="glow">
                       <feGaussianBlur stdDeviation="3" result="coloredBlur" />
@@ -215,7 +215,7 @@ export default function HomePage() {
               <span className="text-gradient">OpenClaw Hub</span>
             </h1>
 
-            <p className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 text-cyan-300/90 animate-slideUp">
+            <p className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 text-red-400/90 animate-slideUp">
               פלטפורמת העוזר האישי AI הכי חזקה בעולם
             </p>
 
@@ -239,17 +239,17 @@ export default function HomePage() {
             <div className="glass-card inline-block px-10 py-5 animate-slideUp animate-glow-pulse">
               <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-sm sm:text-base">
                 <div className="flex items-center gap-2.5">
-                  <div className="p-1.5 rounded-lg bg-cyan-400/10"><Code2 className="w-5 h-5 text-cyan-400" /></div>
+                  <div className="p-1.5 rounded-lg bg-red-500/10"><Code2 className="w-5 h-5 text-red-500" /></div>
                   <span className="text-white font-bold text-lg">500K+</span>
                   <span className="text-gray-400">שורות קוד</span>
                 </div>
-                <div className="hidden sm:block w-px h-6 bg-gradient-to-b from-transparent via-cyan-400/30 to-transparent" />
+                <div className="hidden sm:block w-px h-6 bg-gradient-to-b from-transparent via-red-500/30 to-transparent" />
                 <div className="flex items-center gap-2.5">
-                  <div className="p-1.5 rounded-lg bg-purple-400/10"><Globe className="w-5 h-5 text-purple-400" /></div>
+                  <div className="p-1.5 rounded-lg bg-red-400/10"><Globe className="w-5 h-5 text-red-400" /></div>
                   <span className="text-white font-bold text-lg">53</span>
                   <span className="text-gray-400">קבצי קונפיג</span>
                 </div>
-                <div className="hidden sm:block w-px h-6 bg-gradient-to-b from-transparent via-purple-400/30 to-transparent" />
+                <div className="hidden sm:block w-px h-6 bg-gradient-to-b from-transparent via-red-400/30 to-transparent" />
                 <div className="flex items-center gap-2.5">
                   <div className="p-1.5 rounded-lg bg-orange-400/10"><Puzzle className="w-5 h-5 text-orange-400" /></div>
                   <span className="text-white font-bold text-lg">70+</span>
@@ -257,7 +257,7 @@ export default function HomePage() {
                 </div>
                 <div className="hidden sm:block w-px h-6 bg-gradient-to-b from-transparent via-orange-400/30 to-transparent" />
                 <div className="flex items-center gap-2.5">
-                  <div className="p-1.5 rounded-lg bg-cyan-400/10"><Sparkles className="w-5 h-5 text-cyan-400" /></div>
+                  <div className="p-1.5 rounded-lg bg-red-500/10"><Sparkles className="w-5 h-5 text-red-500" /></div>
                   <span className="text-white font-bold text-lg">&infin;</span>
                   <span className="text-gray-400">אפשרויות</span>
                 </div>
@@ -270,7 +270,7 @@ export default function HomePage() {
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
           <div className="flex flex-col items-center gap-2 animate-bounce">
             <span className="text-xs text-gray-500 tracking-widest uppercase">scroll</span>
-            <ChevronDown className="w-6 h-6 text-cyan-400/60" />
+            <ChevronDown className="w-6 h-6 text-red-500/60" />
           </div>
         </div>
       </section>
@@ -288,7 +288,7 @@ export default function HomePage() {
         <div className="container mx-auto max-w-7xl">
           <div className="text-center mb-20">
             <h2 className="text-5xl sm:text-6xl font-black mb-4 tracking-tight">
-              <span className="text-cyan-400">למה</span>{" "}
+              <span className="text-red-500">למה</span>{" "}
               <span className="text-white">OpenClaw?</span>
             </h2>
             <p className="text-xl text-gray-500 font-light">Why OpenClaw?</p>
@@ -313,7 +313,7 @@ export default function HomePage() {
                         {feature.number}
                       </span>
                     </div>
-                    <h3 className="text-2xl font-bold text-white mb-1.5 group-hover:text-cyan-300 transition-colors">
+                    <h3 className="text-2xl font-bold text-white mb-1.5 group-hover:text-red-400 transition-colors">
                       {feature.titleHe}
                     </h3>
                     <p className="text-base text-gray-500 mb-4 font-light">{feature.titleEn}</p>
@@ -347,33 +347,33 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 max-w-5xl mx-auto">
             {/* Hebrew Edition */}
             <div className="group">
-              <div className="glass-card p-8 h-full flex flex-col transition-all duration-500 group-hover:shadow-[0_20px_60px_rgba(45,212,191,0.15)]">
+              <div className="glass-card p-8 h-full flex flex-col transition-all duration-500 group-hover:shadow-[0_20px_60px_rgba(220,38,38,0.15)]">
                 <div className="relative mb-8 aspect-[3/4] rounded-xl overflow-hidden">
-                  <div className="absolute -inset-4 bg-gradient-to-br from-cyan-500/20 via-purple-600/20 to-orange-500/20 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                  <div className="relative bg-gradient-to-br from-cyan-500 via-purple-600 to-orange-500 p-[2px] rounded-xl h-full">
-                    <div className="w-full h-full bg-[#060a14] rounded-xl flex flex-col items-center justify-center p-8 text-center">
+                  <div className="absolute -inset-4 bg-gradient-to-br from-red-600/20 via-red-500/20 to-orange-500/20 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                  <div className="relative bg-gradient-to-br from-red-600 via-red-500 to-orange-500 p-[2px] rounded-xl h-full">
+                    <div className="w-full h-full bg-[#0a0a0a] rounded-xl flex flex-col items-center justify-center p-8 text-center">
                       <div className="w-20 h-20 mb-6 animate-float">
                         <svg viewBox="0 0 200 200" className="w-full h-full">
                           <circle cx="100" cy="100" r="90" fill="none" stroke="url(#logoGradient)" strokeWidth="3" />
                           <g transform="translate(100, 100)">
-                            <circle cx="0" cy="0" r="15" fill="#2dd4bf" />
+                            <circle cx="0" cy="0" r="15" fill="#dc2626" />
                             {[0, 60, 120, 180, 240, 300].map((angle, i) => (
                               <g key={i} transform={`rotate(${angle})`}>
-                                <path d="M 0,-15 L 8,-70 L 0,-60 L -8,-70 Z" fill="#8b5cf6" opacity="0.8" />
+                                <path d="M 0,-15 L 8,-70 L 0,-60 L -8,-70 Z" fill="#ef4444" opacity="0.8" />
                               </g>
                             ))}
                           </g>
                         </svg>
                       </div>
                       <h3 className="text-2xl font-bold text-white mb-2">OpenClaw</h3>
-                      <p className="text-lg text-cyan-300 mb-4 font-light">המדריך המקיף והשלם</p>
+                      <p className="text-lg text-red-400 mb-4 font-light">המדריך המקיף והשלם</p>
                       <p className="text-sm text-gray-500">מהדורת 2026</p>
                     </div>
                   </div>
                 </div>
                 <div className="flex flex-wrap gap-2 mb-6">
-                  <span className="px-3 py-1 bg-cyan-400/10 text-cyan-300 rounded-full text-sm font-medium border border-cyan-400/20">עברית</span>
-                  <span className="px-3 py-1 bg-purple-400/10 text-purple-300 rounded-full text-sm font-medium border border-purple-400/20">300+ עמודים</span>
+                  <span className="px-3 py-1 bg-red-500/10 text-red-400 rounded-full text-sm font-medium border border-red-500/20">עברית</span>
+                  <span className="px-3 py-1 bg-red-400/10 text-red-300 rounded-full text-sm font-medium border border-red-400/20">300+ עמודים</span>
                   <span className="px-3 py-1 bg-orange-400/10 text-orange-300 rounded-full text-sm font-medium border border-orange-400/20">מהדורת 2026</span>
                 </div>
                 <p className="text-gray-400 leading-relaxed mb-8 flex-grow font-light">
@@ -388,33 +388,33 @@ export default function HomePage() {
 
             {/* English Edition */}
             <div className="group">
-              <div className="glass-card p-8 h-full flex flex-col transition-all duration-500 group-hover:shadow-[0_20px_60px_rgba(139,92,246,0.15)]">
+              <div className="glass-card p-8 h-full flex flex-col transition-all duration-500 group-hover:shadow-[0_20px_60px_rgba(239,68,68,0.15)]">
                 <div className="relative mb-8 aspect-[3/4] rounded-xl overflow-hidden">
-                  <div className="absolute -inset-4 bg-gradient-to-br from-purple-500/20 via-cyan-600/20 to-orange-500/20 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                  <div className="relative bg-gradient-to-br from-purple-500 via-cyan-600 to-orange-500 p-[2px] rounded-xl h-full">
-                    <div className="w-full h-full bg-[#060a14] rounded-xl flex flex-col items-center justify-center p-8 text-center">
+                  <div className="absolute -inset-4 bg-gradient-to-br from-red-500/20 via-red-600/20 to-orange-500/20 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                  <div className="relative bg-gradient-to-br from-red-500 via-red-600 to-orange-500 p-[2px] rounded-xl h-full">
+                    <div className="w-full h-full bg-[#0a0a0a] rounded-xl flex flex-col items-center justify-center p-8 text-center">
                       <div className="w-20 h-20 mb-6 animate-float" style={{ animationDelay: "-2s" }}>
                         <svg viewBox="0 0 200 200" className="w-full h-full">
                           <circle cx="100" cy="100" r="90" fill="none" stroke="url(#logoGradient)" strokeWidth="3" />
                           <g transform="translate(100, 100)">
-                            <circle cx="0" cy="0" r="15" fill="#8b5cf6" />
+                            <circle cx="0" cy="0" r="15" fill="#ef4444" />
                             {[0, 60, 120, 180, 240, 300].map((angle, i) => (
                               <g key={i} transform={`rotate(${angle})`}>
-                                <path d="M 0,-15 L 8,-70 L 0,-60 L -8,-70 Z" fill="#2dd4bf" opacity="0.8" />
+                                <path d="M 0,-15 L 8,-70 L 0,-60 L -8,-70 Z" fill="#dc2626" opacity="0.8" />
                               </g>
                             ))}
                           </g>
                         </svg>
                       </div>
                       <h3 className="text-2xl font-bold text-white mb-2">OpenClaw</h3>
-                      <p className="text-lg text-purple-300 mb-4 font-light">The Complete Mastery Guide</p>
+                      <p className="text-lg text-red-300 mb-4 font-light">The Complete Mastery Guide</p>
                       <p className="text-sm text-gray-500">2026 Edition</p>
                     </div>
                   </div>
                 </div>
                 <div className="flex flex-wrap gap-2 mb-6">
-                  <span className="px-3 py-1 bg-purple-400/10 text-purple-300 rounded-full text-sm font-medium border border-purple-400/20">English</span>
-                  <span className="px-3 py-1 bg-cyan-400/10 text-cyan-300 rounded-full text-sm font-medium border border-cyan-400/20">300+ Pages</span>
+                  <span className="px-3 py-1 bg-red-400/10 text-red-300 rounded-full text-sm font-medium border border-red-400/20">English</span>
+                  <span className="px-3 py-1 bg-red-500/10 text-red-400 rounded-full text-sm font-medium border border-red-500/20">300+ Pages</span>
                   <span className="px-3 py-1 bg-orange-400/10 text-orange-300 rounded-full text-sm font-medium border border-orange-400/20">2026 Edition</span>
                 </div>
                 <p className="text-gray-400 leading-relaxed mb-8 flex-grow font-light">
@@ -443,7 +443,7 @@ export default function HomePage() {
         <div className="container mx-auto max-w-4xl">
           <div className="text-center mb-14">
             <h2 className="text-5xl sm:text-6xl font-black mb-4 tracking-tight">
-              <span className="text-purple-400">תוכן</span>{" "}
+              <span className="text-red-500">תוכן</span>{" "}
               <span className="text-white">הספר</span>
             </h2>
             <p className="text-xl text-gray-500 font-light">Table of Contents</p>
@@ -452,31 +452,31 @@ export default function HomePage() {
           <div className="glass-card p-8">
             <button onClick={() => setTocExpanded(!tocExpanded)} className="w-full flex items-center justify-between text-right mb-6 group">
               <div className="flex items-center gap-4">
-                <div className="p-3 bg-gradient-to-br from-purple-400/15 to-purple-400/5 rounded-xl group-hover:from-purple-400/25 group-hover:to-purple-400/10 transition-all">
-                  <BookOpen className="w-6 h-6 text-purple-400" />
+                <div className="p-3 bg-gradient-to-br from-red-500/15 to-red-500/5 rounded-xl group-hover:from-red-500/25 group-hover:to-red-500/10 transition-all">
+                  <BookOpen className="w-6 h-6 text-red-500" />
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold text-white">15 פרקים מקיפים</h3>
                   <p className="text-gray-500 font-light">מהיסודות ועד התקדמות מקסימלית</p>
                 </div>
               </div>
-              <div className={`p-2 rounded-lg bg-cyan-400/10 transition-transform duration-300 ${tocExpanded ? "rotate-180" : ""}`}>
-                <ChevronDown className="w-5 h-5 text-cyan-400" />
+              <div className={`p-2 rounded-lg bg-red-500/10 transition-transform duration-300 ${tocExpanded ? "rotate-180" : ""}`}>
+                <ChevronDown className="w-5 h-5 text-red-500" />
               </div>
             </button>
 
             <div className={`overflow-hidden transition-all duration-700 ease-in-out ${tocExpanded ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0"}`}>
-              <div className="space-y-2 pt-4 border-t border-cyan-400/10">
+              <div className="space-y-2 pt-4 border-t border-red-500/10">
                 {tocItems.map((item, index) => (
                   <div key={index} className="flex items-center gap-4 p-4 rounded-xl hover:bg-white/[0.03] transition-all duration-300 group">
-                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-400/10 to-purple-400/10 flex items-center justify-center group-hover:from-cyan-400/20 group-hover:to-purple-400/20 transition-all">
-                      <span className="text-lg font-bold text-cyan-400">{item.number}</span>
+                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-red-500/10 to-red-400/10 flex items-center justify-center group-hover:from-red-500/20 group-hover:to-red-400/20 transition-all">
+                      <span className="text-lg font-bold text-red-500">{item.number}</span>
                     </div>
                     <div className="flex-grow">
-                      <h4 className="text-lg font-semibold text-white mb-0.5 group-hover:text-cyan-300 transition-colors">{item.titleHe}</h4>
+                      <h4 className="text-lg font-semibold text-white mb-0.5 group-hover:text-red-400 transition-colors">{item.titleHe}</h4>
                       <p className="text-gray-500 text-sm font-light">{item.title}</p>
                     </div>
-                    <ChevronDown className="w-4 h-4 text-gray-600 -rotate-90 group-hover:text-cyan-400 transition-colors" />
+                    <ChevronDown className="w-4 h-4 text-gray-600 -rotate-90 group-hover:text-red-500 transition-colors" />
                   </div>
                 ))}
               </div>
@@ -515,8 +515,8 @@ export default function HomePage() {
                 </div>
               </div>
               <div className="space-y-4 text-gray-400 leading-relaxed font-light">
-                <p><span className="text-cyan-400 font-semibold">Founder of PixMind Studio</span> - אולפן ליצירת תוכן ויזואלי מבוסס AI</p>
-                <p><span className="text-purple-400 font-semibold">Developer of PixiBot</span> - סטארטאפ AI לאוטומציה חכמה</p>
+                <p><span className="text-red-500 font-semibold">Founder of PixMind Studio</span> - אולפן ליצירת תוכן ויזואלי מבוסס AI</p>
+                <p><span className="text-red-400 font-semibold">Developer of PixiBot</span> - סטארטאפ AI לאוטומציה חכמה</p>
                 <p><span className="text-orange-400 font-semibold">Software Engineering Student</span> - גיל 18, חלוץ בתחום ה-AI בישראל</p>
                 <div className="pt-4 border-t border-orange-400/10">
                   <p>כתב את OpenClaw כפרויקט קוד פתוח למען הקהילה, עם למעלה מ-500,000 שורות קוד ומסמכים מקיפים.</p>
@@ -524,10 +524,10 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="glass-card p-8 card-accent-cyan group hover:shadow-[0_20px_60px_rgba(45,212,191,0.1)] transition-all duration-500">
+            <div className="glass-card p-8 card-accent-red group hover:shadow-[0_20px_60px_rgba(220,38,38,0.1)] transition-all duration-500">
               <div className="flex items-start gap-4 mb-6">
-                <div className="p-3 bg-gradient-to-br from-cyan-400/15 to-cyan-400/5 rounded-xl">
-                  <Sparkles className="w-8 h-8 text-cyan-400" />
+                <div className="p-3 bg-gradient-to-br from-red-500/15 to-red-500/5 rounded-xl">
+                  <Sparkles className="w-8 h-8 text-red-500" />
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold text-white mb-1">OpenClaw Bot</h3>
@@ -535,10 +535,10 @@ export default function HomePage() {
                 </div>
               </div>
               <div className="space-y-4 text-gray-400 leading-relaxed font-light">
-                <p>הבלוג של האתר מופעל על ידי <span className="text-cyan-400 font-semibold">OpenClaw AI Bot</span> שרץ על שרת VPS.</p>
+                <p>הבלוג של האתר מופעל על ידי <span className="text-red-500 font-semibold">OpenClaw AI Bot</span> שרץ על שרת VPS.</p>
                 <p>הבוט כותב פוסטים אוטומטיים, מנתח טרנדים, ומשתף תובנות טכנולוגיות חדשות בזמן אמת.</p>
-                <p><span className="text-purple-400 font-semibold">Powered by Claude Agent SDK</span> - מערכת הסוכנים המתקדמת ביותר מבית Anthropic</p>
-                <div className="pt-4 border-t border-cyan-400/10">
+                <p><span className="text-red-400 font-semibold">Powered by Claude Agent SDK</span> - מערכת הסוכנים המתקדמת ביותר מבית Anthropic</p>
+                <div className="pt-4 border-t border-red-500/10">
                   <p>כל פוסט בבלוג הוא הוכחה חיה ליכולות OpenClaw - יצירת תוכן אוטונומית ברמה גבוהה.</p>
                 </div>
               </div>
@@ -564,10 +564,10 @@ export default function HomePage() {
         <div className="container mx-auto max-w-4xl">
           <div className="gradient-border-card">
             <div className="p-14 text-center relative overflow-hidden">
-              <div className="absolute inset-0 opacity-30" style={{ background: "radial-gradient(circle at 30% 50%, rgba(45,212,191,0.15), transparent 60%), radial-gradient(circle at 70% 50%, rgba(139,92,246,0.15), transparent 60%)" }} />
+              <div className="absolute inset-0 opacity-30" style={{ background: "radial-gradient(circle at 30% 50%, rgba(220,38,38,0.15), transparent 60%), radial-gradient(circle at 70% 50%, rgba(239,68,68,0.15), transparent 60%)" }} />
               <div className="relative z-10">
-                <div className="inline-block p-5 bg-gradient-to-br from-cyan-400/15 to-purple-400/15 rounded-2xl mb-8 animate-float">
-                  <Rocket className="w-14 h-14 text-cyan-400" />
+                <div className="inline-block p-5 bg-gradient-to-br from-red-500/15 to-red-400/15 rounded-2xl mb-8 animate-float">
+                  <Rocket className="w-14 h-14 text-red-500" />
                 </div>
                 <h2 className="text-5xl sm:text-6xl font-black mb-4 tracking-tight">
                   <span className="text-white">מוכנים</span>{" "}

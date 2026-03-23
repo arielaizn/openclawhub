@@ -4,12 +4,12 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative mt-20 border-t border-white/5 bg-[rgba(6,10,20,0.8)] backdrop-blur-xl">
+    <footer className="relative mt-20 border-t border-white/5 bg-[rgba(10,10,10,0.8)] backdrop-blur-xl">
       {/* Animated gradient top border */}
       <div
         className="absolute top-0 left-0 right-0 h-[1px]"
         style={{
-          background: "linear-gradient(90deg, transparent, #2dd4bf, #8b5cf6, #f59e0b, transparent)",
+          background: "linear-gradient(90deg, transparent, #dc2626, #ef4444, #f97316, transparent)",
         }}
       />
 
@@ -27,14 +27,14 @@ export default function Footer() {
               >
                 <defs>
                   <linearGradient id="footerClawGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#2dd4bf" />
-                    <stop offset="100%" stopColor="#8b5cf6" />
+                    <stop offset="0%" stopColor="#dc2626" />
+                    <stop offset="100%" stopColor="#ef4444" />
                   </linearGradient>
                 </defs>
                 <path d="M50 10 C30 20, 20 30, 15 50 C15 60, 20 70, 30 75 L35 55 C35 45, 40 35, 50 30 L50 10 Z" fill="url(#footerClawGradient)" opacity="0.9" />
                 <path d="M50 10 C70 20, 80 30, 85 50 C85 60, 80 70, 70 75 L65 55 C65 45, 60 35, 50 30 L50 10 Z" fill="url(#footerClawGradient)" opacity="0.9" />
                 <path d="M50 30 C45 35, 40 45, 40 55 L35 75 C40 80, 45 85, 50 90 C55 85, 60 80, 65 75 L60 55 C60 45, 55 35, 50 30 Z" fill="url(#footerClawGradient)" />
-                <circle cx="50" cy="85" r="5" fill="#f59e0b" opacity="0.8" />
+                <circle cx="50" cy="85" r="5" fill="#f97316" opacity="0.8" />
               </svg>
               <span className="text-xl font-extrabold text-gradient-static">
                 OpenClaw Hub
@@ -45,8 +45,8 @@ export default function Footer() {
             </p>
             <div className="flex items-center gap-2 text-xs text-gray-600">
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-red-600"></span>
               </span>
               <span>Powered by OpenClaw Bot</span>
             </div>
@@ -54,7 +54,7 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-sm font-bold text-cyan-400 mb-5 tracking-wider uppercase">קישורים מהירים</h3>
+            <h3 className="text-sm font-bold text-red-500 mb-5 tracking-wider uppercase">קישורים מהירים</h3>
             <ul className="space-y-3">
               {[
                 { href: "/", label: "בית" },
@@ -63,7 +63,7 @@ export default function Footer() {
                 { href: "#about", label: "אודות" },
               ].map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-gray-500 hover:text-cyan-400 transition-colors duration-300 text-sm font-light">
+                  <Link href={link.href} className="text-gray-500 hover:text-red-500 transition-colors duration-300 text-sm font-light">
                     {link.label}
                   </Link>
                 </li>
@@ -73,7 +73,7 @@ export default function Footer() {
 
           {/* Resources */}
           <div>
-            <h3 className="text-sm font-bold text-purple-400 mb-5 tracking-wider uppercase">משאבים</h3>
+            <h3 className="text-sm font-bold text-red-400 mb-5 tracking-wider uppercase">משאבים</h3>
             <ul className="space-y-3">
               {[
                 { href: "/docs", label: "תיעוד" },
@@ -82,7 +82,7 @@ export default function Footer() {
                 { href: "/support", label: "תמיכה" },
               ].map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-gray-500 hover:text-purple-400 transition-colors duration-300 text-sm font-light">
+                  <Link href={link.href} className="text-gray-500 hover:text-red-400 transition-colors duration-300 text-sm font-light">
                     {link.label}
                   </Link>
                 </li>
@@ -98,7 +98,7 @@ export default function Footer() {
                 {
                   href: "https://github.com/openclaw",
                   label: "GitHub",
-                  hoverColor: "hover:bg-cyan-500/20 hover:border-cyan-500/30",
+                  hoverColor: "hover:bg-red-500/20 hover:border-red-500/30",
                   icon: (
                     <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
                   ),
@@ -106,7 +106,7 @@ export default function Footer() {
                 {
                   href: "https://twitter.com/openclaw",
                   label: "Twitter",
-                  hoverColor: "hover:bg-purple-500/20 hover:border-purple-500/30",
+                  hoverColor: "hover:bg-red-400/20 hover:border-red-400/30",
                   icon: (
                     <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
                   ),
@@ -143,11 +143,11 @@ export default function Footer() {
             <div className="text-sm text-gray-600 text-center md:text-start font-light">
               <p>
                 Built by{" "}
-                <a href="https://pixmind.studio" target="_blank" rel="noopener noreferrer" className="text-cyan-400/80 hover:text-cyan-400 transition-colors font-medium">
+                <a href="https://pixmind.studio" target="_blank" rel="noopener noreferrer" className="text-red-500/80 hover:text-red-500 transition-colors font-medium">
                   Ariel Eisenstadt
                 </a>
                 {" | "}
-                <a href="https://pixmind.studio" target="_blank" rel="noopener noreferrer" className="text-purple-400/80 hover:text-purple-400 transition-colors font-medium">
+                <a href="https://pixmind.studio" target="_blank" rel="noopener noreferrer" className="text-red-400/80 hover:text-red-400 transition-colors font-medium">
                   PixMind Studio
                 </a>
               </p>
@@ -159,10 +159,10 @@ export default function Footer() {
 
           {/* Powered By Badge */}
           <div className="mt-8 flex justify-center">
-            <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/[0.02] border border-cyan-500/15">
+            <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/[0.02] border border-red-500/15">
               <span className="relative flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-500"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-600"></span>
               </span>
               <span className="text-xs font-semibold text-gradient-static">
                 Powered by OpenClaw Bot
