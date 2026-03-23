@@ -59,6 +59,24 @@ export interface Post {
   excerpt_en: string | null;
 }
 
+export interface Subscriber {
+  id: number;
+  email: string;
+  full_name: string;
+  subscribed_at: string;
+  is_active: boolean;
+}
+
+export interface Newsletter {
+  id: number;
+  title: string;
+  content: string;
+  status: string;
+  sent_at: string | null;
+  recipients_count: number;
+  created_at: string;
+}
+
 export interface Analytics {
   id: number;
   post_id: number;

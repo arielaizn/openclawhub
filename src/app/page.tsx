@@ -17,6 +17,7 @@ import {
   Globe,
   Zap,
 } from "lucide-react";
+import NewsletterPopup from "@/components/NewsletterPopup";
 
 export default function HomePage() {
   const [tocExpanded, setTocExpanded] = useState(false);
@@ -142,6 +143,7 @@ export default function HomePage() {
 
   return (
     <div className="w-full">
+      <NewsletterPopup />
       {/* HERO SECTION */}
       <section
         id="hero"

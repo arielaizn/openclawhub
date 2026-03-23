@@ -11,6 +11,8 @@ import {
   LogOut,
   Menu,
   X,
+  Mail,
+  Users,
 } from "lucide-react";
 
 interface AdminLayoutProps {
@@ -45,6 +47,18 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       label: "פוסט חדש",
       labelEn: "New Post",
       icon: Plus,
+    },
+    {
+      href: "/admin/newsletter",
+      label: "ניוזלייטר",
+      labelEn: "Newsletter",
+      icon: Mail,
+    },
+    {
+      href: "/admin/subscribers",
+      label: "מנויים",
+      labelEn: "Subscribers",
+      icon: Users,
     },
     {
       href: "/admin/settings",

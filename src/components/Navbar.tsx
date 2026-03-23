@@ -25,12 +25,14 @@ export default function Navbar() {
     he: [
       { href: "/", label: "בית" },
       { href: "/blog", label: "בלוג" },
+      { href: "/newsletter", label: "ניוזלייטר" },
       { href: "#books", label: "הספרים" },
       { href: "#about", label: "אודות" },
     ],
     en: [
       { href: "/", label: "Home" },
       { href: "/blog", label: "Blog" },
+      { href: "/newsletter", label: "Newsletter" },
       { href: "#books", label: "Books" },
       { href: "#about", label: "About" },
     ],
