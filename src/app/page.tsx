@@ -519,7 +519,7 @@ export default function HomePage() {
                 <p><span className="text-red-400 font-semibold">Developer of PixiBot</span> - סטארטאפ AI לאוטומציה חכמה</p>
                 <p><span className="text-orange-400 font-semibold">Software Engineering Student</span> - גיל 18, חלוץ בתחום ה-AI בישראל</p>
                 <div className="pt-4 border-t border-orange-400/10">
-                  <p>כתב את OpenClaw כפרויקט קוד פתוח למען הקהילה, עם למעלה מ-500,000 שורות קוד ומסמכים מקיפים.</p>
+                  <p>מקים את קהילת OpenClaw Hub - פלטפורמה קהילתית לעוזר האישי החכם מבוסס AI, עם תוכן, מדריכים ומשאבים מקיפים.</p>
                 </div>
               </div>
             </div>
