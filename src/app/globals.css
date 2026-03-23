@@ -343,6 +343,17 @@ h1, h2, h3, h4, h5, h6 {
 .prose img { border-radius: 0.75rem; margin-top: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4); }
 .prose hr { border: none; border-top: 1px solid var(--border-color); margin-top: 2rem; margin-bottom: 2rem; }
 
+/* Tables */
+.prose .table-wrapper { margin-top: 1.5rem; margin-bottom: 1.5rem; overflow-x: auto; border-radius: 0.75rem; border: 1px solid var(--border-color); background: rgba(17, 17, 17, 0.6); }
+.prose table { width: 100%; border-collapse: collapse; font-size: 0.925rem; }
+.prose thead { background: rgba(220, 38, 38, 0.08); border-bottom: 2px solid var(--accent-red); }
+.prose th { padding: 0.875rem 1.25rem; text-align: start; font-weight: 700; color: var(--text-primary); white-space: nowrap; }
+.prose td { padding: 0.75rem 1.25rem; color: var(--text-muted); border-top: 1px solid rgba(255, 255, 255, 0.04); }
+.prose tbody tr { transition: background-color 0.15s ease; }
+.prose tbody tr:hover { background: rgba(220, 38, 38, 0.04); }
+.prose tbody tr:nth-child(even) { background: rgba(255, 255, 255, 0.015); }
+.prose tbody tr:nth-child(even):hover { background: rgba(220, 38, 38, 0.04); }
+
 /* ============================================
    RTL SUPPORT
    ============================================ */
