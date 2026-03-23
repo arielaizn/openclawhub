@@ -48,9 +48,9 @@ export default function NewPostPage() {
           excerpt,
           category,
           tags,
-          coverImage,
-          voiceUrl,
-          published: published ? 1 : 0,
+          cover_image: coverImage || '/default-cover.jpg',
+          voice_url: voiceUrl || null,
+          is_published: published ? 1 : 0,
         }),
       });
 

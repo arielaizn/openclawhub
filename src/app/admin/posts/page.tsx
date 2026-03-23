@@ -76,9 +76,18 @@ export default function AdminPostsPage() {
         return;
       }
 
-      const data = await response.json();
-      setPosts(data.posts || []);
-      setFilteredPosts(data.posts || []);
+      const result = await response.json();
+      const rawPosts = result.data?.posts || result.posts || [];
+      const mapped = rawPosts.map((p: any) => ({
+        id: p.id,
+        title: p.title,
+        category: p.category,
+        published: p.is_published,
+        views: p.views,
+        createdAt: p.created_at,
+      }));
+      setPosts(mapped);
+      setFilteredPosts(mapped);
     } catch (err) {
       console.error("Error fetching posts:", err);
     } finally {
@@ -101,8 +110,9 @@ export default function AdminPostsPage() {
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          ...post,
-          published: currentStatus === 1 ? 0 : 1,
+          title: post.title,
+          category: post.category,
+          is_published: currentStatus === 1 ? 0 : 1,
         }),
       });
 

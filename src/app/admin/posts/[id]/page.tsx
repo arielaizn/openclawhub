@@ -57,16 +57,17 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
         return;
       }
 
-      const data = await response.json();
+      const result = await response.json();
+      const data = result.data || result;
       setPost(data);
       setTitle(data.title);
       setContent(data.content);
       setExcerpt(data.excerpt);
       setCategory(data.category);
       setTags(data.tags || "");
-      setCoverImage(data.coverImage || "");
-      setVoiceUrl(data.voiceUrl || "");
-      setPublished(data.published === 1);
+      setCoverImage(data.cover_image || "");
+      setVoiceUrl(data.voice_url || "");
+      setPublished(data.is_published === 1);
     } catch (err) {
       alert("שגיאה בטעינת הפוסט");
     } finally {
@@ -97,9 +98,9 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
           excerpt,
           category,
           tags,
-          coverImage,
-          voiceUrl,
-          published: published ? 1 : 0,
+          cover_image: coverImage || '/default-cover.jpg',
+          voice_url: voiceUrl || null,
+          is_published: published ? 1 : 0,
         }),
       });
 
