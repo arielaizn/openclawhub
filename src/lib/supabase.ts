@@ -1,12 +1,34 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+function getSupabaseConfig() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!url || !key) {
+    throw new Error('Missing NEXT_PUBLIC_SUPABASE_URL or NEXT_PUBLIC_SUPABASE_ANON_KEY');
+  }
+  return { url, key };
+}
 
-export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+let _supabase: SupabaseClient | null = null;
+
+export function getSupabase(): SupabaseClient {
+  if (!_supabase) {
+    const { url, key } = getSupabaseConfig();
+    _supabase = createClient(url, key);
+  }
+  return _supabase;
+}
+
+// Keep backward-compatible export as a getter
+export const supabase = new Proxy({} as SupabaseClient, {
+  get(_target, prop) {
+    return (getSupabase() as any)[prop];
+  },
+});
 
 export function createAuthClient(accessToken: string): SupabaseClient {
-  return createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+  const { url, key } = getSupabaseConfig();
+  return createClient(url, key, {
     global: {
       headers: {
         Authorization: `Bearer ${accessToken}`,
