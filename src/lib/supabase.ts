@@ -77,6 +77,27 @@ export interface Newsletter {
   created_at: string;
 }
 
+export interface Skill {
+  id: number;
+  name: string;
+  slug: string;
+  description: string;
+  readme: string;
+  category: string;
+  tags: string;
+  author: string;
+  version: string;
+  install_command: string;
+  github_url: string | null;
+  screenshot_url: string | null;
+  dependencies: string | null;
+  downloads: number;
+  rating: number;
+  rating_count: number;
+  is_approved: boolean;
+  created_at: string;
+}
+
 export interface Analytics {
   id: number;
   post_id: number;

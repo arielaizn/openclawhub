@@ -13,6 +13,7 @@ import {
   X,
   Mail,
   Users,
+  Puzzle,
 } from "lucide-react";
 
 interface AdminLayoutProps {
@@ -59,6 +60,12 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       label: "מנויים",
       labelEn: "Subscribers",
       icon: Users,
+    },
+    {
+      href: "/admin/skills",
+      label: "סקילים",
+      labelEn: "Skills",
+      icon: Puzzle,
     },
     {
       href: "/admin/settings",
