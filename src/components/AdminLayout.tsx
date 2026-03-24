@@ -14,6 +14,7 @@ import {
   Mail,
   Users,
   Puzzle,
+  Clock,
 } from "lucide-react";
 
 interface AdminLayoutProps {
@@ -66,6 +67,12 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       label: "סקילים",
       labelEn: "Skills",
       icon: Puzzle,
+    },
+    {
+      href: "/admin/skills/pending",
+      label: "ממתינים לאישור",
+      labelEn: "Pending Skills",
+      icon: Clock,
     },
     {
       href: "/admin/settings",
