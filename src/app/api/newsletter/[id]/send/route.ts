@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { supabase, createAuthClient } from '@/lib/supabase';
 import { requireAuth } from '@/lib/auth';
 import { Resend } from 'resend';
+import { extractPostSlugs, renderContentToEmailHtml } from '@/lib/newsletter-renderer';
 
 type RouteContext = { params: Promise<{ id: string }> };
 
@@ -70,15 +71,25 @@ export async function POST(request: NextRequest, context: RouteContext) {
 
     const resend = new Resend(resendApiKey);
 
-    // Convert markdown-like content to basic HTML for email
-    const htmlContent = newsletter.content
-      .replace(/^### (.+)$/gm, '<h3>$1</h3>')
-      .replace(/^## (.+)$/gm, '<h2>$1</h2>')
-      .replace(/^# (.+)$/gm, '<h1>$1</h1>')
-      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-      .replace(/\*(.+?)\*/g, '<em>$1</em>')
-      .replace(/\n\n/g, '</p><p>')
-      .replace(/\n/g, '<br>');
+    // Fetch referenced blog posts for {{post:slug}} markers
+    const slugs = extractPostSlugs(newsletter.content);
+    const postsMap = new Map<string, { title: string; slug: string; cover_image: string; excerpt: string }>();
+
+    if (slugs.length > 0) {
+      const { data: posts } = await supabase
+        .from('posts')
+        .select('title, slug, cover_image, excerpt')
+        .in('slug', slugs);
+
+      if (posts) {
+        for (const post of posts) {
+          postsMap.set(post.slug, post);
+        }
+      }
+    }
+
+    // Convert content to email HTML (handles {{post:slug}}, ![](url), and markdown)
+    const htmlContent = renderContentToEmailHtml(newsletter.content, postsMap);
 
     const emailHtml = `
       <div style="max-width:600px;margin:0 auto;font-family:Arial,sans-serif;background:#0a0a0a;color:#f5f5f5;padding:32px;border-radius:12px;">
@@ -90,7 +101,7 @@ export async function POST(request: NextRequest, context: RouteContext) {
           ${newsletter.title}
         </h2>
         <div style="color:#d4d4d4;line-height:1.8;font-size:16px;">
-          <p>${htmlContent}</p>
+          ${htmlContent}
         </div>
         <hr style="border:none;border-top:1px solid #333;margin:32px 0;">
         <p style="color:#737373;font-size:12px;text-align:center;">

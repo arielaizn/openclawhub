@@ -1,9 +1,18 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import AdminLayout from "@/components/AdminLayout";
-import { Save, Eye, ArrowRight } from "lucide-react";
+import { Save, Eye, ArrowRight, ImageIcon, Loader2 } from "lucide-react";
+import PostMentionDropdown, { type MentionPost } from "@/components/PostMentionDropdown";
+import { extractPostSlugs, renderContentToEmailHtml } from "@/lib/newsletter-renderer";
+
+interface PreviewPost {
+  title: string;
+  slug: string;
+  cover_image: string;
+  excerpt: string;
+}
 
 export default function NewNewsletterPage() {
   const [title, setTitle] = useState("");
@@ -12,12 +21,158 @@ export default function NewNewsletterPage() {
   const [showPreview, setShowPreview] = useState(false);
   const router = useRouter();
 
+  // @ mention state
+  const [showMentionDropdown, setShowMentionDropdown] = useState(false);
+  const [mentionSearchTerm, setMentionSearchTerm] = useState("");
+  const [mentionStartIndex, setMentionStartIndex] = useState<number | null>(null);
+  const [mentionSelectedIndex, setMentionSelectedIndex] = useState(0);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  // Image upload state
+  const [uploading, setUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Preview posts state
+  const [previewPosts, setPreviewPosts] = useState<Map<string, PreviewPost>>(new Map());
+
   useEffect(() => {
     const token = localStorage.getItem("adminToken");
     if (!token) {
       router.push("/admin/login");
     }
   }, [router]);
+
+  // Fetch posts for preview when entering preview mode
+  useEffect(() => {
+    if (showPreview) {
+      const slugs = extractPostSlugs(content);
+      if (slugs.length > 0) {
+        fetchPreviewPosts(slugs);
+      }
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [showPreview]);
+
+  const fetchPreviewPosts = async (slugs: string[]) => {
+    try {
+      const response = await fetch("/api/posts?limit=100");
+      const data = await response.json();
+      if (data.success) {
+        const map = new Map<string, PreviewPost>();
+        for (const post of data.data.posts) {
+          if (slugs.includes(post.slug)) {
+            map.set(post.slug, {
+              title: post.title,
+              slug: post.slug,
+              cover_image: post.cover_image,
+              excerpt: post.excerpt,
+            });
+          }
+        }
+        setPreviewPosts(map);
+      }
+    } catch (err) {
+      console.error("Error fetching preview posts:", err);
+    }
+  };
+
+  // @ mention detection in textarea
+  const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const value = e.target.value;
+    const cursorPos = e.target.selectionStart;
+    setContent(value);
+
+    const textBeforeCursor = value.substring(0, cursorPos);
+    const atMatch = textBeforeCursor.match(/@([^\s@]*)$/);
+
+    if (atMatch) {
+      setShowMentionDropdown(true);
+      setMentionSearchTerm(atMatch[1]);
+      setMentionStartIndex(cursorPos - atMatch[0].length);
+      setMentionSelectedIndex(0);
+    } else {
+      setShowMentionDropdown(false);
+      setMentionSearchTerm("");
+      setMentionStartIndex(null);
+    }
+  };
+
+  // Handle post selection from dropdown
+  const handlePostSelect = useCallback((post: MentionPost) => {
+    if (mentionStartIndex === null || !textareaRef.current) return;
+
+    const cursorPos = textareaRef.current.selectionStart;
+    const before = content.substring(0, mentionStartIndex);
+    const after = content.substring(cursorPos);
+    const marker = `{{post:${post.slug}}}`;
+
+    setContent(before + marker + after);
+    setShowMentionDropdown(false);
+    setMentionSearchTerm("");
+    setMentionStartIndex(null);
+
+    setTimeout(() => {
+      if (textareaRef.current) {
+        const newPos = before.length + marker.length;
+        textareaRef.current.focus();
+        textareaRef.current.setSelectionRange(newPos, newPos);
+      }
+    }, 0);
+  }, [mentionStartIndex, content]);
+
+  // Keyboard navigation for mention dropdown
+  const handleTextareaKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (!showMentionDropdown) return;
+
+    if (e.key === "Escape") {
+      e.preventDefault();
+      setShowMentionDropdown(false);
+    } else if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setMentionSelectedIndex((prev) => Math.min(prev + 1, 9));
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setMentionSelectedIndex((prev) => Math.max(prev - 1, 0));
+    }
+  };
+
+  // Image upload handler
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const token = localStorage.getItem("adminToken");
+    if (!token) return;
+
+    setUploading(true);
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const response = await fetch("/api/upload/newsletter-image", {
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}` },
+        body: formData,
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        const textarea = textareaRef.current;
+        const cursorPos = textarea?.selectionStart || content.length;
+        const imageMarkdown = `\n![](${data.data.url})\n`;
+        const before = content.substring(0, cursorPos);
+        const after = content.substring(cursorPos);
+        setContent(before + imageMarkdown + after);
+      } else {
+        alert(data.error?.message || "שגיאה בהעלאת תמונה");
+      }
+    } catch {
+      alert("שגיאת רשת בהעלאת תמונה");
+    } finally {
+      setUploading(false);
+      if (fileInputRef.current) fileInputRef.current.value = "";
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -128,17 +283,67 @@ export default function NewNewsletterPage() {
                   Supports Markdown-like syntax
                 </p>
               </div>
-              <textarea
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-                required
-                rows={20}
-                className="w-full px-4 py-3 bg-slate-800 border border-cyan-400/20 rounded-lg
-                  text-white placeholder-gray-500 font-mono text-sm
-                  focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20
-                  transition-all resize-none"
-                placeholder="כתוב את תוכן הניוזלייטר כאן..."
-              />
+
+              {/* Toolbar */}
+              <div className="flex items-center gap-2 mb-3 flex-wrap">
+                <button
+                  type="button"
+                  onClick={() => fileInputRef.current?.click()}
+                  disabled={uploading}
+                  className="px-3 py-1.5 text-sm bg-slate-700 border border-cyan-400/20 rounded-lg
+                    text-gray-300 hover:text-white hover:border-cyan-400/40 transition-all
+                    disabled:opacity-50 flex items-center gap-1.5"
+                >
+                  {uploading ? (
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  ) : (
+                    <ImageIcon className="w-4 h-4" />
+                  )}
+                  <span>העלאת תמונה</span>
+                </button>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/jpeg,image/png,image/gif,image/webp"
+                  onChange={handleImageUpload}
+                  className="hidden"
+                />
+                <span className="text-xs text-gray-500 mr-auto">
+                  הקלד <code className="bg-slate-700 px-1 rounded text-cyan-400">@</code> כדי לתייג פוסט מהבלוג
+                </span>
+              </div>
+
+              {/* Textarea with mention dropdown */}
+              <div className="relative">
+                <textarea
+                  ref={textareaRef}
+                  value={content}
+                  onChange={handleContentChange}
+                  onKeyDown={handleTextareaKeyDown}
+                  required
+                  rows={20}
+                  className="w-full px-4 py-3 bg-slate-800 border border-cyan-400/20 rounded-lg
+                    text-white placeholder-gray-500 font-mono text-sm
+                    focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20
+                    transition-all resize-none"
+                  placeholder="כתוב את תוכן הניוזלייטר כאן... הקלד @ לתיוג פוסט"
+                />
+                <PostMentionDropdown
+                  isVisible={showMentionDropdown}
+                  searchTerm={mentionSearchTerm}
+                  onSelect={handlePostSelect}
+                  onClose={() => setShowMentionDropdown(false)}
+                  selectedIndex={mentionSelectedIndex}
+                />
+              </div>
+
+              {/* Content hints */}
+              <div className="mt-3 flex flex-wrap gap-3 text-xs text-gray-600">
+                <span><code className="text-gray-500">**טקסט**</code> = <strong className="text-gray-400">מודגש</strong></span>
+                <span><code className="text-gray-500">*טקסט*</code> = <em className="text-gray-400">נטוי</em></span>
+                <span><code className="text-gray-500"># כותרת</code> = כותרת</span>
+                <span><code className="text-gray-500">@</code> = תיוג פוסט</span>
+              </div>
             </div>
 
             {/* Submit */}
@@ -193,12 +398,20 @@ export default function NewNewsletterPage() {
               >
                 {title || "כותרת הניוזלייטר"}
               </h3>
-              <div
-                style={{ color: "#d4d4d4", lineHeight: "1.8", fontSize: "16px" }}
-                className="whitespace-pre-wrap"
-              >
-                {content || "תוכן הניוזלייטר יופיע כאן..."}
-              </div>
+              {content ? (
+                <div
+                  style={{ color: "#d4d4d4", lineHeight: "1.8", fontSize: "16px" }}
+                  dangerouslySetInnerHTML={{
+                    __html: renderContentToEmailHtml(content, previewPosts),
+                  }}
+                />
+              ) : (
+                <div
+                  style={{ color: "#d4d4d4", lineHeight: "1.8", fontSize: "16px" }}
+                >
+                  תוכן הניוזלייטר יופיע כאן...
+                </div>
+              )}
               <hr style={{ border: "none", borderTop: "1px solid #333", margin: "32px 0" }} />
               <p style={{ color: "#737373", fontSize: "12px", textAlign: "center" }}>
                 OpenClaw Hub Newsletter
